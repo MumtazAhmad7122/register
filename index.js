@@ -11,9 +11,6 @@ const port = process.env.PORT || 5000;
 app.use(express.json())
 
 app.use('/api', require('./api/user/Router'))
-
-// app.use('/api', require('/api/products/Router'))
-
 mongooes.connect(process.env.MONGO_URL)
 .then(()=>{console.log("Connected")})
 .catch((err)=>{console.log("Error")})
