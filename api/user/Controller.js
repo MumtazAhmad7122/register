@@ -3,12 +3,23 @@ const User=require('../user/model')
 const {connect,mongoose}=require('mongoose')
 const{hash,compare}=require('bcryptjs')
 const {sign}=require('jsonwebtoken')
-const getuserfrofile=(req, res) => {
+const user = require('../user/model')
+const getuserfrofile=async(req, res) => {
+  await connect(process.env.MONGO_URL)
+  try {
+    const getalluser=await User.find()
     res.json({
-      username:" Banoqabil " + req.body.name
+      getalluser
+    })
+  } 
+  catch (err) {
+    res.json({
+      message:err.message
     })
     
   }
+}
+  
   const signup=async(req,res)=>{
     const {username,password,email}=req.body;
     try {
